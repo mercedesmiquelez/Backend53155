@@ -4,7 +4,7 @@
     "title": "Producto 1",
     "description": "el primer producto",
     "price": 299,
-    "thumbnail": "http://www.google.com",
+    "thumbnail": ["http://www.google.com"],
     "code": "ADF123",
     "stock": 10
   },
@@ -13,7 +13,7 @@
     "title": "Producto 3",
     "description": "el tercer producto",
     "price": 899,
-    "thumbnail": "http://www.google.com",
+    "thumbnail": ["http://www.google.com"],
     "code": "ADF125",
     "stock": 10
   }
