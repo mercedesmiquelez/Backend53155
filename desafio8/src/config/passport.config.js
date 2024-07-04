@@ -71,7 +71,7 @@ const initializePassport = () => {
       {
         clientID: "",
         clientSecret: "",
-        callbackURL: "http://localhost:8080/api/session/login",
+        callbackURL: "http://localhost:8080/api/session/google",
       },
       async (accessToken, refreshToken, profile, cb) => {
         try {
