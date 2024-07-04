@@ -46,12 +46,10 @@ router.get("/:pid", async (req, res) => {
 
     const product = await productDao.getById(pid);
     if (!product)
-      return res
-        .status(404)
-        .json({
-          status: "Error",
-          msg: `Producto con el id ${pid} no encontrado`,
-        });
+      return res.status(404).json({
+        status: "Error",
+        msg: `Producto con el id ${pid} no encontrado`,
+      });
 
     res.status(200).json({ status: "success", payload: product });
   } catch (error) {
@@ -93,12 +91,10 @@ router.put(
 
       const updateProduct = await productDao.update(pid, productData);
       if (!updateProduct)
-        return res
-          .status(404)
-          .json({
-            status: "Error",
-            msg: `Producto con el id ${pid} no encontrado`,
-          });
+        return res.status(404).json({
+          status: "Error",
+          msg: `Producto con el id ${pid} no encontrado`,
+        });
 
       res.status(200).json({ status: "success", payload: updateProduct });
     } catch (error) {
@@ -119,12 +115,10 @@ router.delete(
       const { pid } = req.params;
       const product = await productDao.deleteOne(pid);
       if (!product)
-        return res
-          .status(404)
-          .json({
-            status: "Error",
-            msg: `Producto con el id ${pid} no encontrado`,
-          });
+        return res.status(404).json({
+          status: "Error",
+          msg: `Producto con el id ${pid} no encontrado`,
+        });
 
       res
         .status(200)

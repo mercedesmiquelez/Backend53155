@@ -14,7 +14,7 @@ const addProduct = async (product) => {
     thumbnail,
     code,
     stock,
-    status: true
+    status: true,
   };
 
   if (Object.values(newProduct).includes(undefined)) {
@@ -70,8 +70,6 @@ const deleteProduct = async (id) => {
   products = products.filter((product) => product.id !== id);
   await fs.promises.writeFile(pathFile, JSON.stringify(products));
 };
-
-
 
 export default {
   addProduct,
