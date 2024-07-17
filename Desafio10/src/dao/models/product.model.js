@@ -34,8 +34,8 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    require: true
-  }
+    require: true,
+  },
 });
 
 productSchema.plugin(mongoosePaginate);

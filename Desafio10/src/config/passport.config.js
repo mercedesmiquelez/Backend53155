@@ -2,7 +2,7 @@ import passport from "passport";
 import local from "passport-local";
 import google from "passport-google-oauth20";
 import jwt from "passport-jwt";
-import envs from "./env.config.js"
+import envs from "./env.config.js";
 import { createHash, isValidPassword } from "../utils/hashPassword.js";
 import userDao from "../dao/mongoDao/user.dao.js";
 
@@ -12,10 +12,12 @@ const JWTStrategy = jwt.Strategy;
 const ExtractJWT = jwt.ExtractJwt;
 
 const cookieExtracto = (req) => {
-  let token = null;
+  // Creamos esta fn para extraer el token de la cookie
+  let token = null; // Inicializamos en null
 
   if (req && req.cookies) {
-    token = req.cookies.token;
+    // Verificamos si existen req y req.cookies
+    token = req.cookies.token; // Le asignamos a token lo que obtenemos de la cookie
   }
 
   return token;
@@ -39,9 +41,12 @@ const initializePassport = () => {
         try {
           const { first_name, last_name, email, age, role } = req.body;
           const user = await userDao.getByEmail(username);
-          if (user) return done(null, false, { message: "El usuario ya existe" });
+          if (user)
+            return done(null, false, { message: "El usuario ya existe" });
 
+          //si no existe el usuario
           const newUser = {
+            // creamos un objeto para controlar la información que recibimos
             first_name,
             last_name,
             email,
@@ -61,17 +66,21 @@ const initializePassport = () => {
 
   passport.use(
     "login",
-    new LocalStrategy({ usernameField: "email" }, async (username, password, done) => {
-      try {
-        const user = await userDao.getByEmail(username);
-        if (!user || !isValidPassword(user, password)) return done(null, false, { message: "email o password inválidos" });
+    new LocalStrategy(
+      { usernameField: "email" },
+      async (username, password, done) => {
+        try {
+          const user = await userDao.getByEmail(username);
+          if (!user || !isValidPassword(user, password))
+            return done(null, false, { message: "email o password inválidos" });
 
-        // Si están bien los datos del usuario
-        return done(null, user);
-      } catch (error) {
-        done(error);
+          // Si están bien los datos del usuario
+          return done(null, user);
+        } catch (error) {
+          done(error);
+        }
       }
-    })
+    )
   );
 
   passport.use(
@@ -104,16 +113,18 @@ const initializePassport = () => {
     )
   );
 
+  //Usamos los middleware de passport para configurar:
   passport.use(
-    "jwt",
-    new JWTStrategy(
+    "jwt", //el primer parametro va el nombre de la estrategia
+    new JWTStrategy( //instancia de nuestra estrategia
       {
-        jwtFromRequest: ExtractJWT.fromExtractors([cookieExtracto]),
-        secretOrKey: envs.CODE_SECRET,
+        jwtFromRequest: ExtractJWT.fromExtractors([cookieExtracto]), //Extrae la informacion que necesita de la request: utilizamos el cookieExtracto
+        secretOrKey: "codigoSecreto", //tiene que coincidir con el codigo secreto que configuramos en utils -> jwt.js
       },
       async (jwt_payload, done) => {
+        //funcion callback, que es asincrona
         try {
-          return done(null, jwt_payload);
+          return done(null, jwt_payload); //en el primer parametro null ya que no hay ningun error
         } catch (error) {
           return done(error);
         }

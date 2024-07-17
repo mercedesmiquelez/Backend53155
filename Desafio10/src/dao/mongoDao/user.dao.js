@@ -1,4 +1,4 @@
-import { userModel } from "../models/user.model.js";
+import { userModel } from "../models/user.model.js"; 
 
 const getAll = async () => {
   const users = await userModel.find();
@@ -6,7 +6,7 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  const user = await userModel.findById(id);
+  const user = await userModel.findById(id); 
   return user;
 };
 
@@ -16,20 +16,20 @@ const getByEmail = async (email) => {
 };
 
 const create = async (data) => {
-  const user = await userModel.create(data);
+  const user = await userModel.create(data); 
   return user;
 };
 
 const update = async (id, data) => {
-  await userModel.findByIdAndUpdate(id, data);
-  const user = await userModel.findById(id);
+  await userModel.findByIdAndUpdate(id, data); 
+  const user = await userModel.findById(id); 
   return user;
 };
 
 const deleteOne = async (id) => {
   const user = await userModel.deleteOne({ _id: id });
-  if (user.deletedCount === 0) return false;
-  return true;
+  if (user.deletedCount === 0) return false; 
+  return true; 
 };
 
 export default {
@@ -38,5 +38,5 @@ export default {
   create,
   update,
   deleteOne,
-  getByEmail
+  getByEmail,
 };

@@ -33,7 +33,7 @@ router.post("/jwt", userLoginValidator, async (req, res) => {
     const user = await userDao.getByEmail(email);
     if (!user || !isValidPassword(user, password)) return res.status(401).json({ status: "error", msg: "usuario o contraseña no válido" });
 
-    const token = createToken(user);
+    const token = createToken(user); //Creamos un token
   // Guardamos el token en una cookie
     res.cookie("token", token, { httpOnly: true });
     return res.status(200).json({ status: "success", payload: user, token });

@@ -8,8 +8,7 @@ import initializePassport from "./config/passport.config.js";
 import cookieParser from "cookie-parser";
 import envs from "./config/env.config.js";
 
-
-connectMongoDB();
+connectMongoDB(); // se llama a la función para conectar con la base de datos de Mongo
 
 const app = express();
 

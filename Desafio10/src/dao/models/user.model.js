@@ -7,15 +7,15 @@ const userSchema = new mongoose.Schema({
   last_name: String,
   email: {
     type: String,
-    unique: true,
+    unique: true, //Con esta propiedad, indicamos que el email no se puede repetir
   },
   password: String,
   age: Number,
   role: {
     type: String,
     enum: ["user", "admin"],
-    default: "user"
-  }
+    default: "user",
+  },
 });
 
 export const userModel = mongoose.model(userCollection, userSchema);

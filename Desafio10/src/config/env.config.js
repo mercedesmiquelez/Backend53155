@@ -1,6 +1,6 @@
-import dotenv from "dotenv";
+import dotenv from "dotenv"; // importamos dotenv para configurar nuestras variables de entorno
 
-const environment = "DEV";
+const environment = "DEV"; //Le indico a que puerto conectarse
 dotenv.config({
   path: environment === "PRODUCTION" ? "./.env.prod" : "./.env.dev",
 });
